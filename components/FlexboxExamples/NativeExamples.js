@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, Modal, TouchableHighlight, WebView, Picker, ActivityIndicator, View, FlatList, Text, Switch, TextInput, KeyboardAvoidingView, Image } from 'react-native'
 import dummyData from './dummyData'
 import style from '../../utils/style'
-import TextButton from './TextButton'
+import TextButton from '../TextButton'
 
 export default class NativeExamples extends Component {
   state = {
@@ -18,7 +18,7 @@ export default class NativeExamples extends Component {
     {
       id: 'github',
       name: 'Github',
-      icon: require('../img/Octocat.png'),
+      icon: require('../../img/Octocat.png'),
       url: 'https://en.wikipedia.org/wiki/GitHub',
     },
     {

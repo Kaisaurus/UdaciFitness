@@ -1,23 +1,24 @@
 import React from 'react'
 import { View, Slider, Text, StyleSheet } from 'react-native'
 import style from '../utils/style'
+import { brokenWhite } from '../utils/colors'
 
 export default function UdaciSlider ({ max, unit, step, value, onChange}) {
   return (
-    <View style={style.containerHor}>
+    <View style={_styles.row}>
       <Slider
         step={step}
         value={value}
         maximumValue={max}
         minimumValue={0}
         onValueChange={onChange}
-        style={_styles.slider}
+        style={{flex: 1}}
       />
-      <View style={style.containerHor}>
-        <Text style={style.bodyText}>
+      <View style={_styles.metricCounter}>
+        <Text style={_styles.value}>
           {value}
         </Text>
-        <Text style={style.bodyText}>
+        <Text style={_styles.unit}>
           {unit}
         </Text>
       </View>
@@ -26,7 +27,22 @@ export default function UdaciSlider ({ max, unit, step, value, onChange}) {
 }
 
 const _styles = StyleSheet.create({
-  slider: {
-    width: 200
-  }
+  row: {
+    flexDirection: 'row',
+    flex: 1,
+  },
+  metricCounter: {
+    width: 85,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  value: {
+    fontSize: 24,
+    textAlign: 'center',
+    color: brokenWhite,
+  },
+  unit: {
+    fontSize: 18,
+    color: brokenWhite,
+  },
 })

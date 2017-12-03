@@ -4,7 +4,7 @@ import { bodyTextColor } from '../utils/colors'
 
 export default function DateHeader ({ date }) {
   return (
-    <Text style={{color: bodyTextColor}}>
+    <Text style={{color: bodyTextColor, fontSize: 25}}>
       {date}
     </Text>
   )

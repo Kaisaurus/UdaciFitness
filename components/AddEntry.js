@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text } from 'react-native'
+import { View, TouchableOpacity, Text, Platform, StyleSheet } from 'react-native'
 import {
   getMetricMetaInfo,
   timeToString,
@@ -14,7 +14,7 @@ import { submitEntry, removeEntry} from '../utils/api'
 import { connect } from 'react-redux'
 import { addEntry } from '../actions'
 import style from '../utils/style'
-import { iconColor } from '../utils/colors'
+import { iconColor, bodyTextColor, purple } from '../utils/colors'
 
 class AddEntry extends Component {
 
@@ -89,7 +89,7 @@ class AddEntry extends Component {
 
     if (this.props.alreadyLogged) {
       return (
-        <View>
+        <View style={style.center}>
           <Ionicons
             name='ios-happy-outline'
             size={100}
@@ -106,14 +106,14 @@ class AddEntry extends Component {
     }
 
     return (
-      <View>
+      <View style={_styles.addEntryContainer}>
         <DateHeader date={(new Date()).toLocaleDateString()}/>
         {Object.keys(metaInfo).map((key) => {
           const { getIcon, type, ...rest } = metaInfo[key]
           const value = this.state[key]
 
           return (
-            <View key={key}>
+            <View style={_styles.row} key={key}>
               {getIcon()}
               {type === 'slider'
                 ? <UdaciSlider
@@ -130,11 +130,30 @@ class AddEntry extends Component {
             </View>
           )
         })}
-        <TextButton onPress={this.submit}>SUBMIT</TextButton>
+        <TextButton onPress={this.submit}>
+          SUBMIT
+        </TextButton>
       </View>
     )
   }
 }
+
+const _styles = StyleSheet.create({
+  addEntryContainer: {
+    flex: 1,
+    padding: 15,
+    paddingTop: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  row: {
+    padding: 5,
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center',
+  },
+})
 
 function mapStateToProps(state) {
   const key = timeToString()
