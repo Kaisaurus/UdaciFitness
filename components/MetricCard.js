@@ -14,12 +14,11 @@ export default function MetricCard({ date, metrics }) {
           <View style={_styles.metric} key={metric}>
             {getIcon()}
             <View>
-              <Text style={{fontSize: 20}}
-              >
+              <Text style={{fontSize: 20}}>
                 {displayName}
               </Text>
               <Text style={{fontSize: 15, color: gray}}>
-                {metrics(metric)} {unit}
+                {metrics[metric]} {unit}
               </Text>
             </View>
           </View>

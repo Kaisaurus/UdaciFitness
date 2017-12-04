@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 import { addEntry } from '../actions'
 import style from '../utils/style'
 import { iconColor, bodyTextColor, purple } from '../utils/colors'
+import { NavigationActions } from 'react-navigation'
 
 class AddEntry extends Component {
 
@@ -66,7 +67,7 @@ class AddEntry extends Component {
 
     this.setState(() => ({ run: 0, bike: 0, swim: 0, sleep: 0, eat: 0 }))
 
-    // Navigate to home
+    this.toHome()
 
     submitEntry({ key, entry })
 
@@ -80,8 +81,13 @@ class AddEntry extends Component {
       [key]: getDailyReminderValue()
     }))
 
-    //route to home
+    this.toHome()
+
     removeEntry(key)
+  }
+
+  toHome = () => {
+    this.props.navigation.dispatch(NavigationActions.back({key: 'AddEntry'}))
   }
 
   render() {
