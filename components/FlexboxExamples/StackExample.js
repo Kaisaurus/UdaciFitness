@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, TouchableHighlight } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import styled from 'styled-components/native'
+import DrawerButton from '../DrawerButton'
 
 const CenterView = styled.View`
   flex: 1;
@@ -25,6 +26,7 @@ const NavBtn = styled.TouchableHighlight`
 function Home ({ navigation }) {
   return (
     <CenterView>
+      <DrawerButton navigation={navigation} />
       <NavBtn onPress={() => navigation.navigate('Dashboard')}>
         <MainText>Dashboard</MainText>
       </NavBtn>

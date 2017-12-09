@@ -1,7 +1,6 @@
 import React from 'react'
 import { StatusBar, Platform, StyleSheet, Text, ScrollView, View } from 'react-native'
 import AddEntry from './components/AddEntry'
-import { getMetricMetaInfo } from './utils/helpers'
 import { bgColor, bodyTextColor } from './utils/colors'
 import style from './utils/style'
 import { Provider } from 'react-redux'
@@ -9,11 +8,15 @@ import FlexboxExamples from './components/FlexboxExamples'
 import History from './components/History'
 import store from './store'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
-import { TabNavigator, StackNavigator } from 'react-navigation'
+import { DrawerNavigator, TabNavigator, StackNavigator } from 'react-navigation'
 import { purple, white } from './utils/colors'
 import { Constants } from 'expo'
 import StackExample from './components/FlexboxExamples/StackExample'
+import AnimationExample from './components/FlexboxExamples/AnimationExample'
 import EntryDetail from './components/EntryDetail'
+import Udacifitness from './components/Udacifitness'
+import Live from './components/Live'
+import { setLocalNotification } from './utils/helpers'
 
 function UdaciStatusBar ({backgroundColor, ...props}) {
   return (
@@ -22,6 +25,7 @@ function UdaciStatusBar ({backgroundColor, ...props}) {
     </View>
   )
 }
+
 
 const Tabs = TabNavigator({
   History: {
@@ -38,18 +42,11 @@ const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
     },
   },
-  Examples: {
-    screen: FlexboxExamples,
+  Live: {
+    screen: Live,
     navigationOptions: {
-      tabBarLabel: 'Examples',
-      tabBarIcon: ({ tintColor }) => <FontAwesome name='send' size={30} color={tintColor} />
-    },
-  },
-  StackExample: {
-    screen: StackExample,
-    navigationOptions: {
-      tabBarLabel: 'StackExample',
-      tabBarIcon: ({ tintColor }) => <FontAwesome name='send' size={30} color={tintColor} />
+      tabBarLabel: 'Live',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='ios-speedometer' size={30} color={tintColor} />
     },
   },
 }, {
@@ -87,15 +84,48 @@ const MainNavigator = StackNavigator({
   }
 })
 
+const Drawer = DrawerNavigator({
+  MainNavigator: {
+    screen: MainNavigator,
+    navigationOptions: {
+      drawerLabel: 'Home!',
+      drawerIcons: () => <FontAwesome name='home' size={20} color='red' />
+    }
+  },
+  AnimationExample: {
+    screen: AnimationExample,
+    navigationOptions: {
+      tabBarLabel: 'Examples',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='send' size={30} color={tintColor} />
+    },
+  },
+  Examples: {
+    screen: FlexboxExamples,
+    navigationOptions: {
+      tabBarLabel: 'Examples',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='send' size={30} color={tintColor} />
+    },
+  },
+  StackExample: {
+    screen: StackExample,
+    navigationOptions: {
+      tabBarLabel: 'StackExample',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='send' size={30} color={tintColor} />
+    },
+  },
+})
+
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={ store }>
         <View style={style.container}>
           <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
-          <Tabs />
-          {/* <Text style={style.bodyText}>UdaciFitness</Text> */}
-          {/* <StackExample /> */}
+          <Drawer />
+          {/* <Udacifitness /> */}
         </View>
       </Provider>
     )

@@ -3,7 +3,9 @@ import { View, TouchableOpacity, Text, Platform, StyleSheet } from 'react-native
 import {
   getMetricMetaInfo,
   timeToString,
-  getDailyReminderValue
+  getDailyReminderValue,
+  setLocalNotification,
+  clearLocalNotification,
 } from '../utils/helpers'
 import UdaciSlider from './UdaciSlider'
 import UdaciSteppers from './UdaciSteppers'
@@ -18,7 +20,6 @@ import { iconColor, bodyTextColor, purple } from '../utils/colors'
 import { NavigationActions } from 'react-navigation'
 
 class AddEntry extends Component {
-
   state = {
     run: 0,
     bike: 0,
@@ -71,7 +72,9 @@ class AddEntry extends Component {
 
     submitEntry({ key, entry })
 
-    // Clear local notification
+    // clear local notification then sets one for tomorrow
+     clearLocalNotification()
+      .then(setLocalNotification)
   }
 
   reset = () => {

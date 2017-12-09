@@ -9,6 +9,7 @@ import { white } from '../utils/colors'
 import DateHeader from './DateHeader'
 import MetricCard from './MetricCard'
 import { AppLoading } from 'expo'
+import DrawerButton from './DrawerButton'
 
 class History extends Component {
   state = {
@@ -60,7 +61,7 @@ class History extends Component {
   }
 
   render() {
-    const { entries } = this.props
+    const { entries, navigation } = this.props
     const { ready } = this.state
 
     if(ready === false){
@@ -68,11 +69,14 @@ class History extends Component {
     }
 
     return (
-      <UdaciFitnessCalendar
-        items={entries}
-        renderItem={this.renderItem}
-        renderEmptyDate={this.renderEmptyDate}
-      />
+      <View style={{flex:1}}>
+        <DrawerButton navigation={navigation} />
+        <UdaciFitnessCalendar
+          items={entries}
+          renderItem={this.renderItem}
+          renderEmptyDate={this.renderEmptyDate}
+        />
+      </View>
     )
   }
 }

@@ -5,15 +5,15 @@ import FlexAlignSelf from './FlexAlignSelf'
 import NativeExamples from './NativeExamples'
 import PlatformExample from './PlatformExample'
 import StyledComponents from './StyledComponents'
-import TabExample from './TabExample'
-import StackExample from './StackExample'
+import DrawerButton from '../DrawerButton'
 
 export default class FlexboxExamples extends Component {
+
   render() {
+    const { navigation } = this.props
     return (
       <ScrollView>
-        <StackExample />
-        <TabExample />
+        <DrawerButton navigation={navigation} />
         <StyledComponents />
         <FlexStretch />
         <FlexAlignSelf />
