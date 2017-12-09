@@ -12,6 +12,7 @@ import { DrawerNavigator, TabNavigator, StackNavigator } from 'react-navigation'
 import { purple, white } from './utils/colors'
 import { Constants } from 'expo'
 import StackExample from './components/FlexboxExamples/StackExample'
+import CameraExample from './components/FlexboxExamples/CameraExample'
 import AnimationExample from './components/FlexboxExamples/AnimationExample'
 import EntryDetail from './components/EntryDetail'
 import Udacifitness from './components/Udacifitness'
@@ -85,6 +86,13 @@ const MainNavigator = StackNavigator({
 })
 
 const Drawer = DrawerNavigator({
+  CameraExample: {
+    screen: CameraExample,
+    navigationOptions: {
+      tabBarLabel: 'Camera Example',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='send' size={30} color={tintColor} />
+    },
+  },
   MainNavigator: {
     screen: MainNavigator,
     navigationOptions: {
@@ -95,7 +103,7 @@ const Drawer = DrawerNavigator({
   AnimationExample: {
     screen: AnimationExample,
     navigationOptions: {
-      tabBarLabel: 'Examples',
+      tabBarLabel: 'Animation Examples',
       tabBarIcon: ({ tintColor }) => <FontAwesome name='send' size={30} color={tintColor} />
     },
   },
